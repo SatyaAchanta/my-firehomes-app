@@ -2,8 +2,9 @@
 // This file is responsible for the server-side code of the Firebase firestore database.
 
 import { getApps, ServiceAccount } from "firebase-admin/app";
-import admin, { initializeApp } from "firebase-admin";
+import admin from "firebase-admin";
 import { Firestore, getFirestore } from "firebase-admin/firestore";
+import { Auth, getAuth } from "firebase-admin/auth";
 
 const serviceAccount = {
     "type": "service_account",
@@ -20,10 +21,12 @@ const serviceAccount = {
 }
 
 let firestore: Firestore;
-const currentApp = getApps().length > 0 ? getApps()[0] : initializeApp({
+let auth: Auth;
+const currentApp = getApps().length > 0 ? getApps()[0] : admin.initializeApp({
     credential: admin.credential.cert(serviceAccount as ServiceAccount),
 });
 
+auth = getAuth(currentApp);
 firestore = getFirestore(currentApp);
 
-export { firestore };
+export { firestore, auth };
