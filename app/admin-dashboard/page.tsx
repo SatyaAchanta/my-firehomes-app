@@ -2,8 +2,9 @@ import { Breadcrumbs } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
+import { PropertiesTable } from "./new/properties-table";
 
-function AdminDashboard() {
+const AdminDashboard = async () => {
     return (
         <div>
             <Breadcrumbs items={
@@ -17,6 +18,7 @@ function AdminDashboard() {
                     <PlusCircle className="" /> New Property
                 </Link>
             </Button>
+            <PropertiesTable />
         </div>
     );
 }
