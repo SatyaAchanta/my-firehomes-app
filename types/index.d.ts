@@ -10,6 +10,7 @@ export type Property = {
     bedRooms: number;
     bathRooms: number;
     status: PropertyStatus;
-    createdDate: Date;
-    updatedDate: Date;
+    createdDate?: Date;
+    updatedDate?: Date;
+    description: string;
 };

@@ -29,4 +29,15 @@ const currentApp = getApps().length > 0 ? getApps()[0] : admin.initializeApp({
 auth = getAuth(currentApp);
 firestore = getFirestore(currentApp);
 
-export { firestore, auth };
+const getTotalPages = async (firestoreQuery: FirebaseFirestore.Query<FirebaseFirestore.DocumentData, FirebaseFirestore.DocumentData>, pageSize: number) => {
+
+    const queryCount = firestoreQuery.count();
+    const countSnapshot = await queryCount.get();
+    const countData = countSnapshot.data();
+    const totla = countData.count;
+    const totalPages = Math.ceil(totla / pageSize);
+
+    return totalPages;
+}
+
+export { firestore, auth, getTotalPages };

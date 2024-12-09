@@ -4,7 +4,13 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { PropertiesTable } from "./new/properties-table";
 
-const AdminDashboard = async () => {
+const AdminDashboard = async ({
+    searchParams
+}: {
+    searchParams?: Promise<any>
+}) => {
+    const spVal = await searchParams;
+    console.log(spVal.page);
     return (
         <div>
             <Breadcrumbs items={
@@ -18,7 +24,7 @@ const AdminDashboard = async () => {
                     <PlusCircle className="" /> New Property
                 </Link>
             </Button>
-            <PropertiesTable />
+            <PropertiesTable page={spVal.page ? parseInt(spVal.page) : 1} />
         </div>
     );
 }

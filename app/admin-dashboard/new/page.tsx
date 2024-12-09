@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import NewPropertyForm from "./new-propety-form";
 
 function NewProperty() {
+
+
     return (
         <div>
             <Breadcrumbs items={[{
