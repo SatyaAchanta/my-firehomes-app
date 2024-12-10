@@ -2,7 +2,6 @@ import { Breadcrumbs } from "@/components/ui/breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPropertById } from "@/data/properties";
 import EditPropertyForm from "./edit-property-form";
-import { SaveIcon } from "lucide-react";
 
 const EditProperty = async ({ params }: {
     params?: Promise<any>
@@ -29,9 +28,9 @@ const EditProperty = async ({ params }: {
                         address1={property.address1}
                         address2={property.address2}
                         city={property.city}
-                        zipCode={property.zipCode}
-                        bathRooms={property.bathRooms}
-                        bedRooms={property.bedRooms}
+                        zip={property.zip}
+                        bathrooms={property.bathrooms}
+                        bedrooms={property.bedrooms}
                         description={property.description}
                         price={property.price}
                         status={property.status}

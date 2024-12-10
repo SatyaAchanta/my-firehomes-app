@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 type PropertyFormProps = {
     handleSubmit: (data: z.infer<typeof propertySchema>) => void;
     submitButtonLabel: React.ReactNode;
-    defaultValues: z.infer<typeof propertySchema>;
+    defaultValues?: z.infer<typeof propertySchema>;
 }
 
 function PropertyForm({ handleSubmit, submitButtonLabel, defaultValues }: PropertyFormProps) {
