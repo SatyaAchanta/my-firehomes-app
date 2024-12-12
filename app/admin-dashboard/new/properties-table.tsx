@@ -1,8 +1,10 @@
+import PropertyStatusBadge from "@/components/property-status-badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getProperties } from "@/data/properties";
-import { PencilIcon } from "lucide-react";
+import { EyeIcon, PencilIcon } from "lucide-react";
 import Link from "next/link";
+import numeral from "numeral";
 
 export const PropertiesTable = async ({ page = 1 }: {
     page?: number;
@@ -30,14 +32,20 @@ export const PropertiesTable = async ({ page = 1 }: {
                     <TableBody>
                         {
                             data.map((property) => {
-                                const address = [property.address1, property.address2, property.city, property.zipCode].filter((addressLine) => !!addressLine).join(", ");
+                                const address = [property.address1, property.address2, property.city, property.zip].filter((addressLine) => !!addressLine).join(", ");
                                 return (
                                     <TableRow key={property.id}>
                                         <TableCell>{address}</TableCell>
-                                        <TableCell>${property.price}</TableCell>
-                                        <TableCell>{property.status}</TableCell>
+                                        <TableCell>${numeral(property.price).format("0,0")}</TableCell>
                                         <TableCell>
-                                            View /{" "}
+                                            <PropertyStatusBadge status={property.status} />
+                                        </TableCell>
+                                        <TableCell className="flex justify-end gap-1">
+                                            <Button variant="outline" size="sm" asChild>
+                                                <Link href={`/property/${property.id}`}>
+                                                    <EyeIcon />
+                                                </Link>
+                                            </Button>
                                             <Button variant="outline" size="sm" asChild>
                                                 <Link href={`/admin-dashboard/edit/${property.id}`}>
                                                     <PencilIcon />
@@ -55,7 +63,7 @@ export const PropertiesTable = async ({ page = 1 }: {
                                 {
                                     Array.from({ length: totalPages }).map((_, index) => {
                                         return (
-                                            <Button key={index} className="mx-1" variant="outline" asChild>
+                                            <Button disabled={page === index + 1} key={index} className="mx-1" variant="outline" asChild={page !== index + 1}>
                                                 <Link href={`/admin-dashboard?page=${index + 1}`}>{index + 1}</Link>
                                             </Button>
                                         );
