@@ -13,4 +13,11 @@ export type Property = {
     createdDate?: Date;
     updatedDate?: Date;
     description: string;
+    images?: string[];
 };
+
+export type ImageUpload = {
+    id: string,
+    url: string,
+    file?: File
+}
